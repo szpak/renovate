@@ -12,6 +12,7 @@ export const presets: Record<string, Preset> = {
       'workarounds:ignoreSpringCloudNumeric',
       'workarounds:ignoreWeb3jCoreWithOldReleaseTimestamp',
       'workarounds:ignoreHttp4sDigestMilestones',
+      'workarounds:keepGroovyVersionForSpockUpdates',
       'workarounds:typesNodeVersioning',
       'workarounds:reduceRepologyServerLoad',
       'workarounds:doNotUpgradeFromAlpineStableToEdge',
@@ -73,6 +74,21 @@ export const presets: Record<string, Preset> = {
         matchDatasources: ['maven'],
         matchPackageNames: ['org.web3j:core'],
       },
+    ],
+  },
+  keepGroovyVersionForSpockUpdates: {
+    description: 'Keep Groovy version for Spock updates',
+    packageRules: [
+      {
+        matchPackagePrefixes: ["org.spockframework:spock-"],
+        matchCurrentVersion: "/-groovy-3\\.0$/",
+        allowedVersions: "/-groovy-3\\.0$/"
+      },
+      {
+        matchPackagePrefixes: ["org.spockframework:spock-"],
+        matchCurrentVersion: "/-groovy-4\\.0$/",
+        allowedVersions: "/-groovy-4\\.0$/"
+      }
     ],
   },
   javaLTSVersions: {
